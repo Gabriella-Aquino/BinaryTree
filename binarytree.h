@@ -32,6 +32,10 @@ public:
   void printPreOrder();
   void printPostOrder(Node *node);
   void printPostOrder();
+  bool isSimilar(Node *a, Node *b);
+  bool isSimilar(BinaryTree &otherTree);
+  bool isEqual(Node *a, Node *b);
+  bool isEqual(BinaryTree &otherTree);
 };
 
 BinaryTree::BinaryTree()
@@ -307,4 +311,34 @@ void BinaryTree::printPostOrder(Node *node)
 void BinaryTree::printPostOrder()
 {
   printPostOrder(root);
+}
+
+bool BinaryTree::isSimilar(Node *a, Node *b)
+{
+  if (a == nullptr && b == nullptr)
+  {
+    return true;
+  }
+  if (a == nullptr || b == nullptr)
+  {
+    return false;
+  }
+  return isSimilar(a->leftChild, b->leftChild) && isSimilar(a->rightChild, b->rightChild);
+}
+
+bool BinaryTree::isSimilar(BinaryTree &otherTree)
+{
+  return isSimilar(this->root, otherTree.root);
+}
+
+bool BinaryTree::isEqual(Node *a, Node *b)
+{
+  if (a == nullptr && b == nullptr) return true;
+  if (a == nullptr || b == nullptr) return false;
+
+  return (a->value == b->value) && isEqual(a->leftChild, b->leftChild) && isEqual(a->rightChild, b->rightChild);
+}
+
+bool BinaryTree::isEqual(BinaryTree &otherTree){
+  return isEqual(this->root, otherTree.root);
 }
