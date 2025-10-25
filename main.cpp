@@ -39,7 +39,7 @@ int main() {
             break;
         case 3:
             cout << "\nArvore:\n";
-            tree.print(tree.getRoot());
+            tree.print(tree.getRoot(), 0);
             break;
         case 4:
             cout << "Numero de nos: " << tree.countNodes() << endl;

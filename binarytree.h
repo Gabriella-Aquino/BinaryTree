@@ -169,22 +169,25 @@ void BinaryTree::remove(int value)
   root = remove(value, root);
 }
 
-void BinaryTree::print(Node *root, int level = 0)
-{
-  if (root == nullptr)
-  {
-    return;
-  }
+void BinaryTree::print(Node *node, int space) {
+    if (node == nullptr) return;
 
-  for (int i = 0; i < level; i++)
-  {
-    cout << "-";
-  }
+    // Espaço entre níveis
+    const int COUNT = 5;
+    space += COUNT;
 
-  cout << root->value << endl;
+    // Imprime o filho direito primeiro
+    print(node->rightChild, space);
+    if (node->rightChild)
 
-  print(root->leftChild, level + 1);
-  print(root->rightChild, level + 1);
+    // Imprime o valor do nó atual depois com recuo
+    cout << endl;
+    for (int i = COUNT; i < space; i++)
+        cout << " ";
+    cout << node->value << "\n";
+
+    // Imprime o filho esquerdo
+    print(node->leftChild,  space);
 }
 
 int BinaryTree::countNodes(Node *root)
@@ -342,3 +345,4 @@ bool BinaryTree::isEqual(Node *a, Node *b)
 bool BinaryTree::isEqual(BinaryTree &otherTree){
   return isEqual(this->root, otherTree.root);
 }
+
